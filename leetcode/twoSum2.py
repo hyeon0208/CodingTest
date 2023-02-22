@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 def twoSum2(nums, target):
     # 정렬 - O(nlogn)
     nums.sort()
