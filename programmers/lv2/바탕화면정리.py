@@ -1,9 +1,9 @@
 def solution(wall):
-    x = []
-    y = []
+    row = []
+    col = []
     for i in range(len(wall)):
         for j in range(len(wall[0])):
             if wall[i][j] == "#":
-                x.append(i)
-                y.append(j)
-    return [min(x), min(y), max(x) + 1, max(y) + 1]
+                row.append(i)
+                col.append(j)
+    return [min(row), min(col), max(row) + 1, max(col) + 1]
