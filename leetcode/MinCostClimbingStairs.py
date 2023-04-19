@@ -1,5 +1,5 @@
 class Solution:
-    def minCostClimbingStairs(self, cost: List[int]) -> int:
+    def minCostClimbingStairs(self, cost: list[int]) -> int:
         for i in range(2, len(cost)):
             # 한 칸, 두 칸 오르는 비용 중 제일 작은 비용만큼을 지불해간다.
             cost[i] += min(cost[i - 1], cost[i - 2]) 
