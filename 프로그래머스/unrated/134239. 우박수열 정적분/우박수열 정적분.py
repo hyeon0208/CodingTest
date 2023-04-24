@@ -8,18 +8,19 @@ def ubak(k):
 
 def solution(k, ranges):
     answer = []
-    arr = ubak(k)
+    collatz = ubak(k)
 
     for r in ranges:
         total = 0
-        tmp_arr = arr[r[0]:len(arr)+r[1]]
+        arrY = collatz[r[0] : len(collatz)+r[1]]
         
-        if r[0] >= r[1]+len(arr):
+        if r[0] >= r[1] + len(collatz):
             answer.append(-1)
             continue
             
-        for i in range(len(tmp_arr) - 1):
-            total += ((tmp_arr[i] + tmp_arr[i+1]) / 2)
+        for i in range(len(arrY) - 1):
+            # 사다리꼴 넓이 구하는 공식 : ((윗변+아랫변) * 높이) / 2
+            total += (((arrY[i] + arrY[i+1]) * 1) / 2)
         answer.append(total)
         
     return answer
