@@ -4,8 +4,7 @@ class Solution {
         
         for (int i = 0; i < skill_trees.length; i++) {
             String order = skill_trees[i].replaceAll("[^" + skill + "]", "");
-            String need = skill.substring(0, order.length());
-            if (order.equals(need)) {
+            if (skill.startsWith(order)) {
                 answer ++;
             }
         } 
