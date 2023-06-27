@@ -2,28 +2,23 @@ from collections import deque
 import sys
 input = sys.stdin.readline
 
-n, k = map(int, input().split()) # 수빈이의 위치, 동생의 위치
+n, k = map(int, input().split())  # n: 수빈이가 있는 위치, k: 동생이 있는 위치
+q = deque()
+q.append(n) 
+visited = [-1 for _ in range(100001)]
+visited[n] = 0
 
-def bfs():
-    visited = [-1] * 100001
-    visited[n] = 0
-    q = deque([n])
-
-    while q:
-        cur = q.popleft()
-
-        # 동생의 위치에 도달하면 값 반환
-        if cur == k:
-            return visited[cur]
-
-        # 동생의 위치에 도달할 때 까지, 3가지의 이동 경우를 확인 (x + 1, x - 1, x * 2)
-        for next in (cur + 1, cur - 1, cur * 2):
-            if 0 <= next <= 100000 and visited[next] == -1:
-                if next == cur * 2:
-                    visited[next] = visited[cur] # 순간이동은 0초 소요
-                    q.appendleft(next)
-                else:
-                    visited[next] = visited[cur] + 1 # 걸어서 이동은 1초 소요
-                    q.append(next)
-
-print(bfs())
+while q:
+    s = q.popleft()
+    if s == k:
+        print(visited[s])
+        break
+    if 0 <= s-1 < 100001 and visited[s-1] == -1:
+        visited[s-1] = visited[s] + 1
+        q.append(s-1)
+    if 0 < s*2 < 100001 and visited[s*2] == -1:
+        visited[s*2] = visited[s]
+        q.appendleft(s*2)  # 2*s 가 다른 연산보다 더 높은 우선순위를 가지기 위함
+    if 0 <= s+1 < 100001 and visited[s+1] == -1:
+        visited[s+1] = visited[s] + 1
+        q.append(s+1)
