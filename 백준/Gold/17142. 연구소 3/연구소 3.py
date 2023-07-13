@@ -36,8 +36,6 @@ def bfs(virus, blank):
                 if laboratory[nx][ny] == 2 and visited[nx][ny] == -1:
                     q.append((nx, ny))
                     visited[nx][ny] = visited[x][y] + 1
-                if laboratory[nx][ny] == 1:
-                    continue
     
     if blank != 0:
         return 1e9
