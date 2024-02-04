@@ -11,8 +11,9 @@ public class Main {
         }
         int dasom = Integer.parseInt(br.readLine());
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        while (N-- > 1) {
+        while (N - 1 > 0) {
             pq.add(Integer.parseInt(br.readLine()));
+            N--;
         }
         int result = 0;
         while (!pq.isEmpty() && pq.peek() >= dasom) {
