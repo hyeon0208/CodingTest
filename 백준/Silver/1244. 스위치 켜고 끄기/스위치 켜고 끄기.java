@@ -36,8 +36,13 @@ public class Main {
 
                 int leftSwitchNumberIndex = switchNumberIndex - 1;
                 int rightSwitchNumberIndex = switchNumberIndex + 1;
-                while (leftSwitchNumberIndex >= 1 && rightSwitchNumberIndex <= switchCount && 
-                       switches[leftSwitchNumberIndex] == switches[rightSwitchNumberIndex]) {
+                while (true) {
+                    if (leftSwitchNumberIndex < 1 || rightSwitchNumberIndex > switchCount) {
+                        break;
+                    }
+                    if (switches[leftSwitchNumberIndex] != switches[rightSwitchNumberIndex]) {
+                        break;
+                    }
                     switches[leftSwitchNumberIndex] = reverse(switches[leftSwitchNumberIndex]);
                     switches[rightSwitchNumberIndex] = reverse(switches[rightSwitchNumberIndex]);
 
@@ -59,6 +64,9 @@ public class Main {
     }
 
     public static int reverse(int cur) {
-        return cur == 1 ? 0 : 1;
+        if (cur == 1) {
+            return 0;
+        }
+        return 1;
     }
 }
