@@ -2,29 +2,27 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {
 
-    private static int N;
-    private static int D;
-
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        D = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        int D = Integer.parseInt(st.nextToken());
 
-        List<List<FastRoad>> graph = new ArrayList<>(10001);
-        int[] distance = new int[10001];
+        List<List<Edge>> graph = new ArrayList<>();
+        for (int i = 0; i <= D; i++) {
+            graph.add(new ArrayList<>());
+        }
 
-        for (int i = 0; i < 10001; i++) {
-            graph.add(new ArrayList<>(N));
-            distance[i] = i;
+        for (int i = 0; i < D; i++) {
+            graph.get(i).add(new Edge(i + 1, 1));
         }
 
         for (int i = 0; i < N; i++) {
@@ -36,48 +34,46 @@ public class Main {
             if (start > D || end > D) {
                 continue;
             }
-            graph.get(start).add(new FastRoad(end, length));
-
+            graph.get(start).add(new Edge(end, length));
         }
 
-        dijkstra(graph, distance, 0);
-        System.out.println(distance[D]);
-    }
+        int[] distance = new int[D + 1];
+        Arrays.fill(distance, Integer.MAX_VALUE);
+        distance[0] = 0;
+        
+        PriorityQueue<Edge> pq = new PriorityQueue<>();
+        pq.offer(new Edge(0, 0));
 
+        while (!pq.isEmpty()) {
+            Edge current = pq.poll();
+            int curEnd = current.end;
 
-    private static void dijkstra(List<List<FastRoad>> graph, int[] distance, int start) {
-        if (start > D) {
-            return;
-        }
+            if (distance[curEnd] < current.cost) {
+                continue;
+            }
 
-        if (distance[start + 1] > distance[start] + 1) {
-            distance[start + 1] = distance[start] + 1;
-        }
-
-        for (int i = 0; i < graph.get(start).size(); i++) {
-            if (distance[start] + graph.get(start).get(i).roadLength < distance[graph.get(start).get(i).endPosition]) {
-                distance[graph.get(start).get(i).endPosition] = distance[start] + graph.get(start).get(i).roadLength;
+            for (Edge next : graph.get(curEnd)) {
+                if (distance[next.end] > distance[curEnd] + next.cost) {
+                    distance[next.end] = distance[curEnd] + next.cost;
+                    pq.offer(new Edge(next.end, distance[next.end]));
+                }
             }
         }
 
-        dijkstra(graph, distance, start + 1);
+        System.out.println(distance[D]);
     }
 
-    private static class FastRoad {
-        int endPosition;
-        int roadLength;
+    private static class Edge implements Comparable<Edge> {
+        int end, cost;
 
-        public FastRoad(int endPosition, int roadLength) {
-            this.endPosition = endPosition;
-            this.roadLength = roadLength;
+        Edge(int end, int cost) {
+            this.end = end;
+            this.cost = cost;
         }
 
         @Override
-        public String toString() {
-            return "FastRoad{" +
-                    "endPosition=" + endPosition +
-                    ", roadLength=" + roadLength +
-                    '}';
+        public int compareTo(Edge o) {
+            return this.cost - o.cost;
         }
     }
 }
