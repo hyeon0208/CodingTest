@@ -5,9 +5,9 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    private static final int[] DX = {-1, 0, 1, 0};
-    private static final int[] DY = {0, 1, 0, -1};
-
+    private static final int[] DX = {0, 1, 0, -1};
+    private static final int[] DY = {1, 0, -1, 0};
+    
     private static int C;
     private static int R;
 
