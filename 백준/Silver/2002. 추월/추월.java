@@ -9,37 +9,30 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int n = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(br.readLine());
 
         Map<String, Integer> entryOrder = new HashMap<>();
-        String[] entry = new String[n];
-
-        for (int i = 0; i < n; i++) {
+        String[] entry = new String[N];
+        for (int i = 0; i < N; i++) {
             String carNumber = br.readLine();
             entryOrder.put(carNumber, i);
             entry[i] = carNumber;
         }
 
-        String[] exit = new String[n];
-        for (int i = 0; i < n; i++) {
-            exit[i] = br.readLine();
-        }
-
+        boolean[] checked = new boolean[N];
         int overtakeCount = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                // 현재 차량의 입구 순서
-                int curr = entryOrder.get(exit[i]);
-                // 비교할 차량의 입구 순서
-                int next = entryOrder.get(exit[j]);
-
-                // 더 늦게 들어온 차량이 먼저 나왔다면 추월한 것
-                if (curr > next) {
+        for(int i = 0; i < N; i++) {
+            String exitCar = br.readLine();
+            int exitOrder = entryOrder.get(exitCar);
+            for(int j = 0; j < exitOrder; j++) {
+                if(!checked[j]) {
                     overtakeCount++;
                     break;
                 }
             }
+            checked[exitOrder] = true;
         }
+
         System.out.println(overtakeCount);
     }
 }
