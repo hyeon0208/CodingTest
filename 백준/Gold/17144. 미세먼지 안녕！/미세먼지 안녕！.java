@@ -84,19 +84,19 @@ public class Main {
     private static void airClean(List<Position> positions, int[][] copyMaps) {
         // 위쪽 공기청정기 (반시계 방향)
         int top = positions.get(0).x;
-        for (int x = top - 1; x > 0; x--) {
+        for (int x = top - 1; x > 0; x--) { // 위에서 아래
             copyMaps[x][0] = copyMaps[x - 1][0];
         }
 
-        for (int y = 0; y < C - 1; y++) {
+        for (int y = 0; y < C - 1; y++) { // 오른쪽에서 왼쪽
             copyMaps[0][y] = copyMaps[0][y + 1];
         }
 
-        for (int x = 0; x < top; x++) {
+        for (int x = 0; x < top; x++) { // 아래에서 위
             copyMaps[x][C - 1] = copyMaps[x + 1][C - 1];
         }
 
-        for (int y = C - 1; y > 1; y--) {
+        for (int y = C - 1; y > 1; y--) { // 왼쪽에서 오른쪽
             copyMaps[top][y] = copyMaps[top][y - 1];
         }
         copyMaps[top][1] = 0;
