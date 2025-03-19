@@ -28,7 +28,7 @@ public class Main {
             }
         }
 
-        System.out.println(String.format("%.11f", ans));
+        System.out.println(ans);
     }
 
     // 평균 계산
