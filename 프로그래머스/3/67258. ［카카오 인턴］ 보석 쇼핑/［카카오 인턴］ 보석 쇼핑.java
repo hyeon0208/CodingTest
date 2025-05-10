@@ -13,7 +13,7 @@ class Solution {
             return new int[]{1, 1};
         }
 
-       int start = 0;
+        int start = 0;
         int end = 0;
         int minLength = gems.length;
         int resultStart = 0;
