@@ -59,6 +59,10 @@ public class Main {
                         while (temp < N - 1 && newBoard[i][temp + 1] == 0) {
                             newBoard[i][temp + 1] = newBoard[i][temp];
                             newBoard[i][temp] = 0;
+                            if (merged[i][temp]) {
+                                merged[i][temp + 1] = true;
+                                merged[i][temp] = false;
+                            }
                             temp++;
                         }
 
@@ -79,6 +83,10 @@ public class Main {
                         while (temp > 0 && newBoard[i][temp - 1] == 0) {
                             newBoard[i][temp - 1] = newBoard[i][temp];
                             newBoard[i][temp] = 0;
+                            if (merged[i][temp]) {
+                                merged[i][temp - 1] = true;
+                                merged[i][temp] = false;
+                            }
                             temp--;
                         }
 
@@ -98,6 +106,10 @@ public class Main {
                         while (temp < N - 1 && newBoard[temp + 1][j] == 0) {
                             newBoard[temp + 1][j] = newBoard[temp][j];
                             newBoard[temp][j] = 0;
+                            if (merged[temp][j]) {
+                                merged[temp + 1][j] = true;
+                                merged[temp][j] = false;
+                            }
                             temp++;
                         }
 
@@ -117,6 +129,10 @@ public class Main {
                         while (temp > 0 && newBoard[temp - 1][j] == 0) {
                             newBoard[temp - 1][j] = newBoard[temp][j];
                             newBoard[temp][j] = 0;
+                            if (merged[temp][j]) {
+                                merged[temp - 1][j] = true;
+                                merged[temp][j] = false;
+                            }
                             temp--;
                         }
 
