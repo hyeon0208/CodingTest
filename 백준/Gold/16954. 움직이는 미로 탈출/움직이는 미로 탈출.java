@@ -38,10 +38,6 @@ public class Main { // https://www.acmicpc.net/problem/16954
         while (!queue.isEmpty()) {
             Position cur = queue.poll();
 
-            if (hasWall(cur.x, cur.y, cur.time)) {
-                continue;
-            }
-
             if (cur.time >= 8) { // 벽이 모두 사라진 후에는 자유롭게 이동 가능
                 return true;
             }
@@ -55,9 +51,11 @@ public class Main { // https://www.acmicpc.net/problem/16954
                 int ny = cur.y + DY[i];
                 int ntime = cur.time + 1;
 
-                if (0 <= nx && nx < 8 && 0 <= ny && ny < 8 && !visited[nx][ny][ntime] && !hasWall(nx, ny, ntime) && !hasWall(nx, ny, cur.time)) {
-                    visited[nx][ny][ntime] = true;
-                    queue.offer(new Position(nx, ny, ntime));
+                if (0 <= nx && nx < 8 && 0 <= ny && ny < 8 && !visited[nx][ny][ntime]) {
+                    if (!hasWall(nx, ny, ntime) && !hasWall(nx, ny, cur.time)) { // 현재 시간 그리고 다음 시간에도 해당 위치에 벽이 없어야함.
+                        visited[nx][ny][ntime] = true;
+                        queue.offer(new Position(nx, ny, ntime));
+                    }
                 }
             }
         }
