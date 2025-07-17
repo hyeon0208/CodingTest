@@ -1,16 +1,23 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
 
 class Solution {
     public int solution(int[] citations) {
-        Arrays.sort(citations);
+        int answer = 0;
+
+
+        Arrays.sort(citations, Comparator.reverseOrder());
 
         for (int i = 0; i < citations.length; i++) {
-            int h = citations.length - i;
-            if (citations[i] >= h) {
-                return h;
+            if (citations[i] > answer) {
+                answer++;
+                continue;
+            }
+            if (citations[i] <= answer) {
+                return answer;
             }
         }
 
-        return 0;
+        return answer;
     }
 }
