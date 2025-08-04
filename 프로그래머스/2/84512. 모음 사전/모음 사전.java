@@ -1,8 +1,8 @@
 import java.util.*;
 
 class Solution {
-    List<String> words;
-    String[] alpabets = {"A", "E", "I", "O", "U"};
+    private List<String> words;
+    private static String[] alpabets = {"A", "E", "I", "O", "U"};
     
     public int solution(String word) {
         words = new ArrayList<>();
