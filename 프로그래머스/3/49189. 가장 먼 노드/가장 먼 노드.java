@@ -11,7 +11,6 @@ class Solution {
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
         }
-
         for (int[] e : edge) {
             graph.get(e[0]).add(e[1]);
             graph.get(e[1]).add(e[0]);
@@ -26,14 +25,12 @@ class Solution {
         for (int i = 1; i <= n; i++) {
             maxDistance = Math.max(maxDistance, distances[i]);
         }
-
         int count = 0;
         for (int i = 1; i <= n; i++) {
             if (distances[i] == maxDistance) {
                 count++;
             }
         }
-
         return count;
     }
 
