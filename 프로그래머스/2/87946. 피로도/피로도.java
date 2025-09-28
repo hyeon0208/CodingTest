@@ -11,7 +11,6 @@ class Solution {
         if (depth > visited.length) {
             return;
         }
-        
         for (int i = 0; i < dungeons.length; i++) {
             if (!visited[i]) {
                 if (k >= dungeons[i][0]) {
