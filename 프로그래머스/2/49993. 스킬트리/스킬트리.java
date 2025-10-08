@@ -4,19 +4,31 @@ class Solution {
     public int solution(String skill, String[] skill_trees) {
         int result = 0;
         
-        for (String str : skill_trees) {
-            String temp = "";
-            for (int i = 0; i < str.length(); i++) {
-                String c = String.valueOf(str.charAt(i));
-                if (skill.contains(c)) {
-                    temp += c;
-                }
-            }   
-            if (skill.startsWith(temp)) {
+        for (String tree : skill_trees) {
+            if (find(skill, tree)) {
                 result++;
             }
         }
-        
+
         return result;
+    }
+    
+    private boolean find(String skill, String tree) {
+        int skillIndex = 0;
+            
+        for (char t : tree.toCharArray()) {
+            int idx = skill.indexOf(t);
+
+            if (idx == -1) {
+                continue;
+            }
+
+            if (idx == skillIndex) {
+                skillIndex++;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 }
