@@ -8,7 +8,7 @@ class Solution {
         return result;
     }
     
-    private static void dfs(int[] numbers, int depth, int target, int sum) {
+    private void dfs(int[] numbers, int depth, int target, int sum) {                                          
         if (depth == numbers.length) {
             if (sum == target) {
                 result++;
@@ -16,7 +16,7 @@ class Solution {
             return;
         }
         
-        dfs(numbers, depth + 1, target, sum + numbers[depth]) ;
-        dfs(numbers, depth + 1, target, sum - numbers[depth]) ;
+        dfs(numbers, depth + 1, target, sum + numbers[depth]);
+        dfs(numbers, depth + 1, target, sum - numbers[depth]);
     }
 }
