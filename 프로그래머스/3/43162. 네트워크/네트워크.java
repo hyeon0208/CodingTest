@@ -19,12 +19,16 @@ class Solution {
             }
         }
         
-        
+        // parent 배열: 직속 부모만 저장 (1단계만 올라감)
+        // find(): 최종 루트까지 올라감 (꼭대기까지!) 
+        // 즉 최종 루트를 찾기 위해 find()를 마지막에 한번더 
         Set<Integer> set = new HashSet();
         for (int i = 0; i < n; i++) {
             set.add(find(parent[i]));
         }
-         
+
+        System.out.println(Arrays.toString(parent));
+
         return set.size();
     }
     
